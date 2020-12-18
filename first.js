@@ -1,19 +1,20 @@
 const container=document.querySelector("#container") //getting the container of all squares
 let rangeval=16; //default  size
-const clear=document.getElementById("clear");
+const clear=document.getElementById("clear"); //clear button
 clear.onclick=clearGrid;
 let range=document.getElementById("range");
-range.addEventListener("change", createGrid)
-let sqNumber=document.getElementById("sqNumber");
+range.addEventListener("change", createGrid) //creating grin onchange
+let sqNumber=document.getElementById("sqNumber"); //display number of squares
 document.getElementById("black").onclick=black;
+document.getElementById("gradDark").onclick=graduallyDarker;
 
 
 window.onload=createGrid; // create initial grid of 10*10
 
 
 function createGrid(){ 
-    rangeval=range.value;
-    sqNumber.textContent=rangeval;
+    rangeval=range.value; 
+    sqNumber.textContent=rangeval; 
     container.innerHTML="";
     container.setAttribute("style", `grid-template-rows: repeat(${rangeval}, 1fr) ;grid-template-columns: repeat(${rangeval}, 1fr) ;`);
 
@@ -36,8 +37,15 @@ function clearGrid(){
 }
 
 
-function graduallyDarken(){
-
+function graduallyDarker(){
+    let nodelist =document.getElementsByClassName("square");
+    let squares=[...nodelist];
+    squares.forEach((square)=>{
+        let initial= 100;
+        square.addEventListener("mouseover",()=>{
+            square.style.backgroundColor=`hsl(0,0%,${initial-=10}%)`;
+        })
+    })
 }
 function black(){
     let nodelist =document.getElementsByClassName("square");
