@@ -1,6 +1,5 @@
 const container=document.querySelector("#container") //getting the container of all squares
-let square;
-let rangeval=10;
+let rangeval=16; //default  size
 const clear=document.getElementById("clear");
 clear.onclick=clearGrid;
 let range=document.getElementById("range");
@@ -19,34 +18,34 @@ function createGrid(){
     container.setAttribute("style", `grid-template-rows: repeat(${rangeval}, 1fr) ;grid-template-columns: repeat(${rangeval}, 1fr) ;`);
 
     for (let i =0; i<(rangeval*rangeval);i++){
-         square= document.createElement("div");
-        square.classList.add("square");
-        square.setAttribute("style", `margin:0; box-sizing:border-box; border: 2px solid black; width:${600/rangeval}px; height:${600/rangeval}px; background-color:white;`);
-        black();
-        container.appendChild(square);
-    }
-}
-function clearGrid(){
-    container.innerHTML="";
-    for (let i =0; i<(rangeval*rangeval);i++){
         let square= document.createElement("div");
         square.classList.add("square");
         square.setAttribute("style", `margin:0; box-sizing:border-box; border: 2px solid black; width:${600/rangeval}px; height:${600/rangeval}px; background-color:white;`);
-        square.addEventListener("mouseover",()=>{
-            square.style.backgroundColor="black";
-        });
         container.appendChild(square);
     }
+    black();
+
 }
+
+function clearGrid(){
+    let nodelist =document.getElementsByClassName("square");
+    let squares=[...nodelist];
+    squares.forEach((square)=>{
+        square.style.backgroundColor="white";
+})
+}
+
 
 function graduallyDarken(){
 
 }
 function black(){
-    let squares= document.getElementsByClassName("square");
-squares.array.forEach(element => {
-    
-});
+    let nodelist =document.getElementsByClassName("square");
+    let squares=[...nodelist];
+    squares.forEach((square)=>{
+        square.addEventListener("mouseover",()=>{
+            square.style.backgroundColor="black";
+        })
+    })
 }
-
 
