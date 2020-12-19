@@ -8,6 +8,7 @@ let sqNumber = document.getElementById("sqNumber"); //display number of squares
 document.getElementById("black").onclick = black;
 document.getElementById("gradDark").onclick = graduallyDarker;
 document.getElementById("random").onclick = randomColors;
+document.getElementById("color").onclick=userColor;
 
 window.onload = createGrid; // create initial grid of 10*10
 
@@ -25,9 +26,8 @@ function createGrid() {
     square.classList.add("square");
     square.setAttribute(
       "style",
-      `margin:0; box-sizing:border-box; border: 2px solid black; width:${
-        600 / rangeval
-      }px; height:${600 / rangeval}px; background-color:white;`
+      `margin:0; box-sizing:border-box; border: 2px solid black; width:${600 / rangeval}px; 
+                            height:${600 / rangeval}px; background-color:white;`
     );
     container.appendChild(square);
   }
@@ -53,11 +53,6 @@ function graduallyDarker() {
   });
 }
 
-
-
-
-
-
 function black() {
   let nodelist = document.getElementsByClassName("square");
   let squares = [...nodelist];
@@ -73,10 +68,25 @@ function randomColors() {
     let squares = [...nodelist];
     squares.forEach((square) => {
       square.addEventListener("mouseover", () => {
-        square.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 256)})`;
+        square.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)},
+                                            ${Math.floor(Math.random() * 256)},
+                                            ${Math.floor(Math.random() * 256)})`;
     });
     });
   }
 
+  function userColor(){
+      let userChoice=document.getElementById("color");
+      userChoice.addEventListener("input",()=>{
+        let nodelist = document.getElementsByClassName("square");
+        let squares = [...nodelist];
+        squares.forEach((square) => {
+          square.addEventListener("mouseover", () => {
+            square.style.backgroundColor=userChoice.value;
+      })
+
+    });
+    });
+  }
 
 
