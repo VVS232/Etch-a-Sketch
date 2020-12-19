@@ -9,8 +9,8 @@ document.getElementById("black").onclick = black;
 document.getElementById("gradDark").onclick = graduallyDarker;
 document.getElementById("random").onclick = randomColors;
 document.getElementById("color").onclick=userColor;
-let currentColor;
-let onOff=false;
+let currentColor;  //for turning on/off drawing by click
+let onOff=false; //same
 
 window.onload = createGrid; // create initial grid of 10*10
 
@@ -41,6 +41,8 @@ function clearGrid() {
   let squares = [...nodelist];
   squares.forEach((square) => {
     square.style.backgroundColor = "white";
+    square.style.pointerEvents="none";
+
   });
 }
 
@@ -56,22 +58,27 @@ function graduallyDarker() {
 }
 
 function black() {
-    activeColor="black";
+    activeColor="blackColor";
   let nodelist = document.getElementsByClassName("square");
   let squares = [...nodelist];
   squares.forEach((square) => {
-    square.addEventListener("mouseover",  blackColor);
+    square.style.pointerEvents="none";
+    square.addEventListener("mouseover",  ()=>{
+        square.style.pointerEvents="none";
+        square.style.backgroundColor = "black";
+
+
+    });
   });
 }
 
-function blackColor(e){
-    e.currentTarget.style.backgroundColor = "black";
-}
+
 
 function randomColors() {
     let nodelist = document.getElementsByClassName("square");
     let squares = [...nodelist];
     squares.forEach((square) => {
+        square.style.pointerEvents="none";
       square.addEventListener("mouseover", () => {
         square.style.backgroundColor = `rgb(${Math.floor(Math.random() * 256)},
                                             ${Math.floor(Math.random() * 256)},
@@ -86,6 +93,7 @@ function randomColors() {
         let nodelist = document.getElementsByClassName("square");
         let squares = [...nodelist];
         squares.forEach((square) => {
+            square.style.pointerEvents="none";
           square.addEventListener("mouseover", () => {
             square.style.backgroundColor=userChoice.value;
       })
@@ -95,20 +103,22 @@ function randomColors() {
   }
 
 
-container.addEventListener("click",()=>{
+
+  container.addEventListener("click",()=>{
     let nodelist=document.getElementsByClassName("square");
     let squares=[...nodelist];    
     if (onOff){    
         squares.forEach((square)=>{
-            square.removeEventListener("mouseover",blackColor)
+            square.style.pointerEvents="none";
+
         })
         onOff=false;
     }
     else{
         squares.forEach((square)=>{
-            square.addEventListener("mouseover",blackColor)
+            square.style.pointerEvents="auto";
+            onOff=true;
         })
-        onOff=true;
 
     }
-})
+  })
