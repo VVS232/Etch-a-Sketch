@@ -60,14 +60,12 @@ function black() {
   let nodelist = document.getElementsByClassName("square");
   let squares = [...nodelist];
   squares.forEach((square) => {
-    square.addEventListener("mouseover", function blackColor(){
-      square.style.backgroundColor = "black";
-    });
+    square.addEventListener("mouseover",  blackColor);
   });
 }
 
-function blackColor(){
-    
+function blackColor(e){
+    e.currentTarget.style.backgroundColor = "black";
 }
 
 function randomColors() {
@@ -102,7 +100,7 @@ container.addEventListener("click",()=>{
     let squares=[...nodelist];    
     if (onOff){    
         squares.forEach((square)=>{
-            square.removeEventListener("mouseover",black)
+            square.removeEventListener("mouseover",blackColor)
         })
         onOff=false;
     }
