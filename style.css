@@ -1,14 +1,40 @@
 body{
+    background-color: aquamarine;
     width:100vw;
     height:100vh
 }
+
 #container{
+    box-sizing: content-box;
 display:grid;
     background-color: gray;
-    width:60vw;
+    width:70vw;
     height:60vh;
-    flex-wrap: wrap;
-    margin:100px auto;
     overflow: hidden;
+    border-radius: 20px;
+}
+#frame{
+    display: flex;
+    background-color: #cc0000;
+    width:80vw;
+    height:80vh;
+    margin:50px auto;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+}
+#title{
+    display: inline;
+    font-family: 'Dancing Script', cursive;
+    font-size: 400%;
+    margin:0;
 }
 
+#controls{
+    display: flex;
+}
+#resolution{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

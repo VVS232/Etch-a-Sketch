@@ -25,7 +25,8 @@ function createGrid() {
   container.innerHTML = "";
   container.setAttribute(
     "style",
-    `grid-template-rows: repeat(${Math.floor(parseInt(containerHeight)/(parseInt(containerWidth) / rangeval))}, 1fr) ;grid-template-columns: repeat(${rangeval}, 1fr) ;`
+    `grid-template-rows: repeat(${Math.floor(parseInt(containerHeight)/(parseInt(containerWidth) / rangeval))}, 1fr) ;
+                            grid-template-columns: repeat(${rangeval}, 1fr) ;`
   );
 
   for (let i = 0; i < Math.floor(parseInt(containerHeight)/(parseInt(containerWidth) / rangeval)) * rangeval; i++) {
@@ -119,7 +120,7 @@ function userColor(){
     }
     else{
         squares.forEach((square)=>{
-            square.style.pointerEvents="auto";
+            square.style.pointerEvents="initial";
             onOff=true;
         })
 
