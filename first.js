@@ -11,25 +11,30 @@ document.getElementById("random").onclick = randomColors;
 document.getElementById("color").onclick=userColor;
 let currentColor;  //for turning on/off drawing by click
 let onOff=false; //same
+let containerStyle=getComputedStyle(container); //for adaptive width of container
+let containerWidth=containerStyle.width;
+let containerHeight=containerStyle.height;
 
 window.onload = createGrid; // create initial grid of 10*10
 
+
+//functions
 function createGrid() {
   rangeval = range.value;
   sqNumber.textContent = rangeval;
   container.innerHTML = "";
   container.setAttribute(
     "style",
-    `grid-template-rows: repeat(${rangeval}, 1fr) ;grid-template-columns: repeat(${rangeval}, 1fr) ;`
+    `grid-template-rows: repeat(${Math.floor(parseInt(containerHeight)/(parseInt(containerWidth) / rangeval))}, 1fr) ;grid-template-columns: repeat(${rangeval}, 1fr) ;`
   );
 
-  for (let i = 0; i < rangeval * rangeval; i++) {
+  for (let i = 0; i < Math.floor(parseInt(containerHeight)/(parseInt(containerWidth) / rangeval)) * rangeval; i++) {
     let square = document.createElement("div");
     square.classList.add("square");
     square.setAttribute(
       "style",
-      `margin:0; box-sizing:border-box; border: 2px solid black; width:${600 / rangeval}px; 
-                            height:${600 / rangeval}px; background-color:white;`
+      `margin:0; box-sizing:border-box; border: 2px solid black; width:${containerWidth / rangeval}px; 
+                            height:${containerHeight/(Math.floor(parseInt(containerHeight)/(parseInt(containerWidth) / rangeval)))}px; background-color:white;`
     );
     container.appendChild(square);
   }
@@ -72,8 +77,6 @@ function black() {
   });
 }
 
-
-
 function randomColors() {
     let nodelist = document.getElementsByClassName("square");
     let squares = [...nodelist];
@@ -87,23 +90,23 @@ function randomColors() {
     });
   }
 
-  function userColor(){
-      let userChoice=document.getElementById("color");
-      userChoice.addEventListener("input",()=>{
+function userColor(){
+    let userChoice=document.getElementById("color");
+    userChoice.addEventListener("input",()=>{
         let nodelist = document.getElementsByClassName("square");
         let squares = [...nodelist];
         squares.forEach((square) => {
             square.style.pointerEvents="none";
-          square.addEventListener("mouseover", () => {
-            square.style.backgroundColor=userChoice.value;
-      })
+            square.addEventListener("mouseover", () => {
+                square.style.backgroundColor=userChoice.value;
+            })
 
+        });
     });
-    });
-  }
+}
 
 
-
+//draw and stop after mouseclick
   container.addEventListener("click",()=>{
     let nodelist=document.getElementsByClassName("square");
     let squares=[...nodelist];    
