@@ -3,12 +3,14 @@ let rangeval = 16; //default  size
 const clear = document.getElementById("clear"); //clear button
 clear.onclick = clearGrid;
 let range = document.getElementById("range");
-range.addEventListener("change", createGrid); //creating grin onchange
+range.addEventListener("change", createGrid); //creating gridf onchange
 let sqNumber = document.getElementById("sqNumber"); //display number of squares
 document.getElementById("black").onclick = black;
 document.getElementById("gradDark").onclick = graduallyDarker;
 document.getElementById("random").onclick = randomColors;
 document.getElementById("color").onclick=userColor;
+let currentColor;
+let onOff=false;
 
 window.onload = createGrid; // create initial grid of 10*10
 
@@ -54,13 +56,18 @@ function graduallyDarker() {
 }
 
 function black() {
+    activeColor="black";
   let nodelist = document.getElementsByClassName("square");
   let squares = [...nodelist];
   squares.forEach((square) => {
-    square.addEventListener("mouseover", () => {
+    square.addEventListener("mouseover", function blackColor(){
       square.style.backgroundColor = "black";
     });
   });
+}
+
+function blackColor(){
+    
 }
 
 function randomColors() {
@@ -90,3 +97,20 @@ function randomColors() {
   }
 
 
+container.addEventListener("click",()=>{
+    let nodelist=document.getElementsByClassName("square");
+    let squares=[...nodelist];    
+    if (onOff){    
+        squares.forEach((square)=>{
+            square.removeEventListener("mouseover",black)
+        })
+        onOff=false;
+    }
+    else{
+        squares.forEach((square)=>{
+            square.addEventListener("mouseover",blackColor)
+        })
+        onOff=true;
+
+    }
+})
