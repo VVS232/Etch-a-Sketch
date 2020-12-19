@@ -34,7 +34,7 @@ function createGrid() {
     square.classList.add("square");
     square.setAttribute(
       "style",
-      `margin:0; box-sizing:border-box; border: 2px solid black; width:${containerWidth / rangeval}px; 
+      `margin:0; box-sizing:border-box; width:${containerWidth / rangeval}px; 
                             height:${containerHeight/(Math.floor(parseInt(containerHeight)/(parseInt(containerWidth) / rangeval)))}px; background-color:white;`
     );
     container.appendChild(square);
@@ -107,7 +107,7 @@ function userColor(){
 }
 
 
-//draw and stop after mouseclick
+//start and stop after mouseclick
   container.addEventListener("click",()=>{
     let nodelist=document.getElementsByClassName("square");
     let squares=[...nodelist];    
@@ -120,7 +120,7 @@ function userColor(){
     }
     else{
         squares.forEach((square)=>{
-            square.style.pointerEvents="initial";
+            square.style.pointerEvents="all";
             onOff=true;
         })
 
