@@ -1,7 +1,7 @@
 const container = document.querySelector("#container"); //getting the container of all squares
 let rangeval = 16; //default  size
 const clear = document.getElementById("clear"); //clear button
-clear.onclick = clearGrid;
+clear.onclick = createGrid;
 let range = document.getElementById("range");
 range.addEventListener("change", createGrid); //creating gridf onchange
 let sqNumber = document.getElementById("sqNumber"); //display number of squares
@@ -42,16 +42,6 @@ function createGrid() {
   black();
 }
 
-function clearGrid() {
-  let nodelist = document.getElementsByClassName("square");
-  let squares = [...nodelist];
-  squares.forEach((square) => {
-    square.style.backgroundColor = "white";
-    square.style.pointerEvents="none";
-
-  });
-}
-
 function graduallyDarker() {
   let nodelist = document.getElementsByClassName("square");
   let squares = [...nodelist];
@@ -70,10 +60,7 @@ function black() {
   squares.forEach((square) => {
     square.style.pointerEvents="none";
     square.addEventListener("mouseover",  ()=>{
-        square.style.pointerEvents="none";
         square.style.backgroundColor = "black";
-
-
     });
   });
 }
